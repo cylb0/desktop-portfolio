@@ -1,0 +1,13 @@
+.profilePicture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media(max-width: 768px) {
+    .profilePicture {
+        width: 100px;
+        height: 100px;
+    }
+}

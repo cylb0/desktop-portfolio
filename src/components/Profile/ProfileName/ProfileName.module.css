@@ -1,0 +1,16 @@
+.profileName {
+    color: #f8f8f6;
+    font-family: 'Ubuntu Mono', monospace;
+    text-transform: capitalize;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.profileJob {
+    color: #f8f8f6;
+    font-family: 'Ubuntu Mono', monospace;
+    text-transform: capitalize;
+    font-size: 24px;
+    font-weight: bold;
+}

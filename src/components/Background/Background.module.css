@@ -1,0 +1,52 @@
+.backgroundWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    box-sizing: border-box;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transform-origin: center center;
+}
+
+.spinning {
+    animation: rotateBackAndForth 10s linear infinite;
+}
+
+.whiteBlurOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(248, 248, 246, .2);
+    backdrop-filter: blur(10px);
+}
+
+@keyframes rotateBackAndForth {
+    0% {
+        transform: rotate(0deg) scale(1.2);
+    }
+    50% {
+        transform: rotate(5deg) scale(1.2);
+    }    
+    100%{
+        transform: rotate(0deg) scale(1.2);
+    }
+}
+
+@media(max-width: 768px) {
+    .whiteBlurOverlay {
+        backdrop-filter: blur(5px);
+    }
+}
