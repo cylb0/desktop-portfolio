@@ -9,10 +9,10 @@ interface NavButtonProps {
 }
 
 const NavButton: React.FC<NavButtonProps> = ({ id, src, alt, label }) => {
-    const { toggleWindow } = useWindowContext();
+    const { openWindow } = useWindowContext();
 
     return (
-        <button className={styles.navButton} onClick={() => toggleWindow(id)}>
+        <button className={styles.navButton} onClick={() => openWindow(id)}>
             <img className={styles.icon} src={src} alt={alt} />
             <span className={styles.label}>{label}</span>
         </button>

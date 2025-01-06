@@ -7,11 +7,14 @@ export interface WindowState {
     label: string;
     isOpen: boolean;
     content: ReactNode;
+    zIndex: number;
 }
 
 export interface WindowContextProps {
     windows: Array<WindowState>;
-    toggleWindow: (id: string) => void;
+    openWindow: (id: string) => void;
+    closeWindow: (id: string) => void;
+    selectActiveWindow: (id: string) => void;
 }
 
 export interface WindowProviderProps {

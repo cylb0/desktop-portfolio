@@ -7,7 +7,7 @@ interface TitleBarProps {
 }
 
 const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
-    const { windows, toggleWindow } = useWindowContext();
+    const { windows, closeWindow } = useWindowContext();
     const windowData = windows.find((window) => window.id === id);
 
     if (!windowData) {
@@ -18,7 +18,7 @@ const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
     return (
         <div className={styles.titleBar}>
             <h1 className={styles.title}>{windowData.label}</h1>
-            <CloseIcon onClick={() => toggleWindow(id)} />
+            <CloseIcon onClick={() => closeWindow(id)} />
         </div>
     )
 }

@@ -11,31 +11,35 @@ const NavbarItems: Array<WindowState> = [
         alt: 'Profile icon',
         label: 'Présentation',
         isOpen: true,
-        content: undefined
+        content: undefined,
+        zIndex: 1,
     },
     {
         id: '2',
         src: ResumeIcon,
         alt: 'Resume icon',
         label: 'CV',
-        isOpen: false,
-        content: undefined
+        isOpen: true,
+        content: undefined,
+        zIndex: 1,
     },
     {
         id: '3',
         src: ProjectsIcon,
         alt: 'Projects icon',
         label: 'Projects',
-        isOpen: false,
-        content: undefined
+        isOpen: true,
+        content: undefined,
+        zIndex: 1,
     },
     {
         id: '4',
         src: ContactIcon,
         alt: 'Contact icon',
         label: 'Contact',
-        isOpen: false,
-        content: undefined
+        isOpen: true,
+        content: undefined,
+        zIndex: 1,
     },
 ]
 

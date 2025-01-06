@@ -23,6 +23,7 @@ const DesktopContent: React.FC = () => {
                         key={window.id}
                         id={window.id}
                         style={{
+                            zIndex: window.zIndex,
                             top: `calc(50% + ${index * gap}px)`,
                             left: `calc(50% + ${index * gap}px)`,
                             transform: 'translate(-50%, -50%)',
