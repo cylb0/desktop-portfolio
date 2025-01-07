@@ -8,6 +8,7 @@ export interface WindowState {
     isOpen: boolean;
     content: ReactNode;
     zIndex: number;
+    position?: WindowPosition;
 }
 
 export interface WindowContextProps {
@@ -15,8 +16,14 @@ export interface WindowContextProps {
     openWindow: (id: string) => void;
     closeWindow: (id: string) => void;
     selectActiveWindow: (id: string) => void;
+    updateWindowPosition: (id: string, position: WindowPosition) => void;
 }
 
 export interface WindowProviderProps {
     children: ReactNode;
+}
+
+export interface WindowPosition {
+    x: number;
+    y: number;
 }

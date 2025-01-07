@@ -17,7 +17,9 @@ const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
 
     return (
         <div className={styles.titleBar}>
-            <h1 className={styles.title}>{windowData.label}</h1>
+            <div className={styles.titleContainer}>
+                <h1 className={styles.title}>{windowData.label}</h1>
+            </div>
             <CloseIcon onClick={() => closeWindow(id)} />
         </div>
     )

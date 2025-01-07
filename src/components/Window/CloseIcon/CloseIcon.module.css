@@ -3,4 +3,33 @@
     width: 24px;
     background: #e7561f;
     border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.icon::before,
+.icon::after {
+    content: '';
+    position: absolute;
+    background: #f8f8f6;
+    width: 18px;
+    height: 2px;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+}
+
+.icon::before {
+    transform: rotate(-45deg);
+}
+
+.icon::after {
+    transform: rotate(45deg);
+}
+
+.icon:hover {
+    scale: 1.05;
+    cursor: pointer;
 }

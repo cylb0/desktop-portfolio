@@ -8,26 +8,21 @@ import Navbar from '../Navbar/Navbar';
 import Taskbar from '../Taskbar/Taskbar';
 import { useWindowContext, WindowProvider } from '../../contexts/WindowContext';
 import Window from '../Window/Window';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const DesktopContent: React.FC = () => {
     const { windows } = useWindowContext();
-    const gap = 20;
 
     return (
         <div className={styles.desktop}>
             <div className={styles.content}>
                 {windows
                     .filter((window) => window.isOpen)
-                    .map((window, index) => (
+                    .map((window) => (
                     <Window
                         key={window.id}
                         id={window.id}
-                        style={{
-                            zIndex: window.zIndex,
-                            top: `calc(50% + ${index * gap}px)`,
-                            left: `calc(50% + ${index * gap}px)`,
-                            transform: 'translate(-50%, -50%)',
-                        }}
                     >
                         {window.content}
                     </Window>
@@ -61,9 +56,11 @@ const Desktop: React.FC = () => {
                     />
                 </div>
             ) : (
-                <WindowProvider>
-                    <DesktopContent />
-                </WindowProvider>
+                <DndProvider backend={HTML5Backend}>
+                    <WindowProvider>
+                        <DesktopContent />
+                    </WindowProvider>
+                </DndProvider>
             )}
         </>
     )

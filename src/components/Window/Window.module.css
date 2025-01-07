@@ -2,7 +2,23 @@
     position: absolute;
     height: 90vh;
     width: 80vw;
-    background: blue;
     display: flex;
     flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(76, 74, 72, .8);
+    opacity: .5;
+}
+
+.active {
+    opacity: 1;
+}
+
+.window:hover {
+    opacity: 1;
+}
+
+.content {
+    flex: 1;
+    background: #333031;
 }
