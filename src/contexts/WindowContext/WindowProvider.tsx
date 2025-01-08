@@ -15,19 +15,12 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
             const windowWidth = window.innerWidth * .8;
             const windowHeight = window.innerHeight * .9;
 
-            const baseX = (window.innerWidth - windowWidth) / 2;
-            const baseY = (window.innerHeight - windowHeight) / 2;
+            const { baseX, baseY } = computeBasePosition(windowWidth, windowHeight);
 
             const openWindows = prev.filter((win) => win.isOpen);
             const positions = openWindows.map((win) => win.position);
 
-            let x = baseX;
-            let y = baseY;
-
-            while (positions.some((pos) => pos?.x === x && pos.y === y)) {
-                x += gap;
-                y += gap;
-            }
+            const { x, y } = findAvailablePosition(baseX, baseY, gap, positions);
 
             return prev.map((window) =>
                 window.id === id && window.isOpen === false
@@ -88,6 +81,25 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
             )
         );
     };
+
+    const computeBasePosition = (windowWidth: number, windowHeight: number) => {
+        const baseX = (window.innerWidth - windowWidth) / 2;
+        const baseY = (window.innerHeight - windowHeight) / 2;
+
+        return { baseX, baseY };
+    }
+
+    const findAvailablePosition = (baseX: number, baseY: number, gap: number, positions: Array<WindowPosition | undefined>) => {
+        let x = baseX;
+        let y = baseY;
+
+        while (positions.some((pos) => pos?.x === x && pos.y === y)) {
+            x += gap;
+            y += gap;
+        }
+
+        return { x, y };
+    }
 
     return (
         <WindowContext.Provider value={{ maxZIndex, windows, openWindow, closeWindow, selectActiveWindow, updateWindowPosition }}>
