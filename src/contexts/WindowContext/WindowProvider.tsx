@@ -61,18 +61,34 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     };
 
     const selectActiveWindow = (id: string) => {
+        let updatedZIndex = false;
+
         setWindows((prev) =>
-            prev.map((window) =>
-                window.id === id ? { ...window, zIndex: maxZIndex + 1 } : window
-            )
-        );
-        setMaxZIndex((prev) => prev + 1);
+            prev.map((window) => {
+                if (window.id === id) {
+                    if (window.zIndex < maxZIndex) {
+                        updatedZIndex = true;
+                        console.log('new active: ', id)
+                        return { ...window, zIndex: maxZIndex + 1 };
+                    }
+                    return { ...window };
+                }
+                return { ...window };
+            })
+        )
+
+        if (updatedZIndex) {
+            setMaxZIndex((prev) => prev + 1);
+        }
     };
     
     const updateWindowPosition = (id: string, position: WindowPosition) => {
         setWindows((prev) =>
             prev.map((window) =>
-                window.id === id ? { ...window, position } : window
+                window.id === id ? {
+                    ...window,
+                    position,
+                } : window
             )
         );
     };

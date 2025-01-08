@@ -14,8 +14,14 @@
     opacity: 1;
 }
 
-.window:hover {
+.selectable {
     opacity: 1;
+    cursor: pointer;
+    box-shadow: 0 0 5px 3px rgba(248, 248, 246, .5);
+}
+
+.isDragging {
+    opacity: .8
 }
 
 .content {
