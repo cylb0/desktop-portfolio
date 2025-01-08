@@ -11,7 +11,7 @@ interface WindowProps {
 
 const Window: React.FC<WindowProps> = ({ id, children }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
-    const { windows, selectActiveWindow, updateWindowPosition } = useWindowContext();
+    const { maxZIndex, windows, selectActiveWindow, updateWindowPosition } = useWindowContext();
     const windowData = windows.find((window) => window.id === id);
     
     const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
@@ -32,9 +32,8 @@ const Window: React.FC<WindowProps> = ({ id, children }) => {
         dragPreview(null);
     }, [dragPreview])
     
-    const activeZIndex = Math.max(...windows.map((window) => window.zIndex));
-    if (!windowData || !windowData.position) return null;
-    const isActive = windowData.zIndex === activeZIndex;
+    if (!windowData) return null;
+    const isActive = windowData.zIndex === maxZIndex;
     
     return (
         <div
@@ -44,8 +43,9 @@ const Window: React.FC<WindowProps> = ({ id, children }) => {
                         ${!isDragging && isActive ? styles.active : ''}
                         ${!isDragging && isHovered && !isActive ? styles.selectable : ''}`}
             style={{
-                top: `${windowData.position.y}px`,
-                left: `${windowData.position.x}px`,
+                visibility: windowData.isOpen ? 'visible' : 'hidden',
+                top: `${windowData.position?.y || 0}px`,
+                left: `${windowData.position?.x || 0}px`,
                 zIndex: windowData.zIndex,
             }}
             onClick={() => selectActiveWindow(id)}

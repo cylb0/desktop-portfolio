@@ -18,7 +18,7 @@ const DesktopContent: React.FC = () => {
         <div className={styles.desktop}>
             <div className={styles.content}>
                 {windows
-                    .filter((window) => window.isOpen)
+                    // .filter((window) => window.isOpen)
                     .map((window) => (
                     <Window
                         key={window.id}

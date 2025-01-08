@@ -10,9 +10,6 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
 
     const openWindow = (id: string) => {
         setWindows((prev) => {
-            const isAlreadyOpen = prev.find((window) => window.id === id)?.isOpen;
-            if (isAlreadyOpen) return prev;
-
             const gap = 10;
 
             const windowWidth = window.innerWidth * .8;
@@ -38,7 +35,7 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
                     ...window,
                     isOpen: true,
                     zIndex: maxZIndex + 1,
-                    position: window.position || { x, y },
+                    position: { x, y },
                 }
                 : window
             )
@@ -68,7 +65,6 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
                 if (window.id === id) {
                     if (window.zIndex < maxZIndex) {
                         updatedZIndex = true;
-                        console.log('new active: ', id)
                         return { ...window, zIndex: maxZIndex + 1 };
                     }
                     return { ...window };
@@ -94,7 +90,7 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     };
 
     return (
-        <WindowContext.Provider value={{ windows, openWindow, closeWindow, selectActiveWindow, updateWindowPosition }}>
+        <WindowContext.Provider value={{ maxZIndex, windows, openWindow, closeWindow, selectActiveWindow, updateWindowPosition }}>
             {children}
         </WindowContext.Provider>
     );

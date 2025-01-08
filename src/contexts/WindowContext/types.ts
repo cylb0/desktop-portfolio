@@ -12,6 +12,7 @@ export interface WindowState {
 }
 
 export interface WindowContextProps {
+    maxZIndex: number;
     windows: Array<WindowState>;
     openWindow: (id: string) => void;
     closeWindow: (id: string) => void;
