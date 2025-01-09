@@ -48,6 +48,7 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
                 : window
             )
         );
+        setMaxZIndex((prev) => prev - 1);
     };
 
     const selectActiveWindow = (id: string) => {
