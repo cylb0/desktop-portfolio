@@ -6,6 +6,7 @@ export interface WindowState {
     alt: string;
     label: string;
     isOpen: boolean;
+    isMinimized: boolean;
     content: ReactNode;
     zIndex: number;
     position?: WindowPosition;
@@ -16,6 +17,10 @@ export interface WindowContextProps {
     windows: Array<WindowState>;
     openWindow: (id: string) => void;
     closeWindow: (id: string) => void;
+    minimizeWindow: (id: string) => void;
+    closeAllWindows: () => void;
+    minimizeAllWindows: () => void;
+    restoreWindow: (id: string) => void;
     selectActiveWindow: (id: string) => void;
     updateWindowPosition: (id: string, position: WindowPosition) => void;
 }

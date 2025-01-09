@@ -8,6 +8,39 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     const [windows, setWindows] = useState<Array<WindowState>>(NavbarItems);
     const [maxZIndex, setMaxZIndex] = useState<number>(1);
 
+    const open = (window: WindowState, position: WindowPosition): WindowState => {
+        return {
+            ...window,
+            isOpen: true,
+            zIndex: maxZIndex + 1,
+            position: position,
+        }
+    }
+
+    const minimize = (window: WindowState): WindowState => {
+        return {
+            ...window,
+            isMinimized: true,
+        }
+    }
+
+    const restore = (window: WindowState): WindowState => {
+        return {
+            ...window,
+            isMinimized: false,
+            zIndex: maxZIndex + 1,
+        }
+    }
+
+    const close = (window: WindowState): WindowState => {
+        return {
+            ...window,
+            isOpen: false,
+            isMinimized: false,
+            position: undefined,
+        }
+    }
+
     const openWindow = (id: string) => {
         setWindows((prev) => {
             const gap = 10;
@@ -22,16 +55,17 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
 
             const { x, y } = findAvailablePosition(baseX, baseY, gap, positions);
 
-            return prev.map((window) =>
-                window.id === id && window.isOpen === false
-                ? {
-                    ...window,
-                    isOpen: true,
-                    zIndex: maxZIndex + 1,
-                    position: { x, y },
+            return prev.map((window) => {
+                if (window.id === id && window.isMinimized) {
+                    return restore(window);
                 }
-                : window
-            )
+
+                if (window.id === id && !window.isOpen) {
+                    return open(window, { x, y });
+                }
+
+                return window;
+            });
         });
         setMaxZIndex((prev) => prev + 1);
     };
@@ -39,16 +73,41 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     const closeWindow = (id: string) => {
         setWindows((prev) =>
             prev.map((window) =>
-                window.id === id
-                ? {
-                    ...window,
-                    isOpen: false,
-                    position: undefined,
-                }
-                : window
+                window.id === id ? close(window) : window
             )
         );
         setMaxZIndex((prev) => prev - 1);
+    };
+
+    const minimizeWindow = (id: string) => {
+        setWindows((prev) =>
+            prev.map((window) =>
+                window.id === id ? minimize(window) : window
+            )
+        )
+    }
+
+    const restoreWindow = (id: string) => {
+        setWindows((prev) =>
+            prev.map((window) =>
+                window.id === id ? restore(window) : window
+            ) 
+        )
+        setMaxZIndex((prev) => prev + 1);
+    }
+
+    const closeAllWindows = () => {
+        setWindows((prev) =>
+            prev.map((window) => close(window))
+        );
+    };
+
+    const minimizeAllWindows = () => {
+        setWindows((prev) =>
+            prev.map((window) =>
+                window.isOpen ? minimize(window) : window
+            )
+        );
     };
 
     const selectActiveWindow = (id: string) => {
@@ -103,7 +162,18 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     }
 
     return (
-        <WindowContext.Provider value={{ maxZIndex, windows, openWindow, closeWindow, selectActiveWindow, updateWindowPosition }}>
+        <WindowContext.Provider value={{
+            maxZIndex,
+            windows,
+            openWindow,
+            closeWindow,
+            minimizeWindow,
+            closeAllWindows,
+            minimizeAllWindows,
+            restoreWindow,
+            selectActiveWindow,
+            updateWindowPosition
+        }}>
             {children}
         </WindowContext.Provider>
     );

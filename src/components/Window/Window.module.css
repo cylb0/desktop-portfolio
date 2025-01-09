@@ -1,12 +1,10 @@
 .window {
     position: absolute;
-    height: 90vh;
+    height: 80vh;
     width: 80vw;
     display: flex;
     flex-direction: column;
-    border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(76, 74, 72, .8);
     opacity: .5;
 }
 
@@ -31,7 +29,8 @@
 
 @media (max-width: 768px) {
     .window {
-        height: 100vh;
+        /* height: 100vh; */
+        height: calc(100vh - 75px);
         width: 100vw;
     }
 }

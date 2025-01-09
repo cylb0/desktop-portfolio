@@ -1,8 +1,9 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import TitleBar from './TitleBar/TitleBar';
 import styles from './Window.module.css';
 import { useWindowContext } from '../../contexts/WindowContext';
 import { useDrag } from 'react-dnd';
+import useMobile from '../../hooks/useMobile';
 
 interface WindowProps {
     id: string;
@@ -12,7 +13,9 @@ interface WindowProps {
 const Window: React.FC<WindowProps> = ({ id, children }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
     const { maxZIndex, windows, selectActiveWindow, updateWindowPosition } = useWindowContext();
+    const isMobile = useMobile();
     const windowData = windows.find((window) => window.id === id);
+    const ref = useRef<HTMLDivElement>(null);
     
     const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
         type: 'WINDOW',
@@ -37,16 +40,18 @@ const Window: React.FC<WindowProps> = ({ id, children }) => {
     
     return (
         <div
-            ref={drag}
+            ref={isMobile ? ref : drag}
             className={`${styles.window}
                         ${isDragging ? styles.isDragging : ''}
                         ${!isDragging && isActive ? styles.active : ''}
                         ${!isDragging && isHovered && !isActive ? styles.selectable : ''}`}
             style={{
-                visibility: windowData.isOpen ? 'visible' : 'hidden',
-                top: `${windowData.position?.y || 0}px`,
-                left: `${windowData.position?.x || 0}px`,
+                visibility: (!isMobile && windowData.isOpen && !windowData.isMinimized) || (isMobile && windowData.isOpen && !windowData.isMinimized && isActive) ? 'visible' : 'hidden',
+                top: `${isMobile ? 0 : (windowData.position?.y || 0)}px`,
+                left: `${isMobile ? 0 : (windowData.position?.x || 0)}px`,
                 zIndex: windowData.zIndex,
+                border: `${isMobile ? 'none' : '1px solid rgba(76, 74, 72, .8)'}`,
+                borderRadius: `${isMobile ? '0' : '8px'}`,
             }}
             onClick={() => selectActiveWindow(id)}
             onMouseEnter={() => setIsHovered(true)}
