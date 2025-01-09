@@ -28,3 +28,10 @@
     flex: 1;
     background: #4c4a48;
 }
+
+@media (max-width: 768px) {
+    .window {
+        height: 100vh;
+        width: 100vw;
+    }
+}
