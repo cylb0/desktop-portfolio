@@ -22,3 +22,8 @@
     color: #f8f8f6;
     text-align: center;
 }
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}

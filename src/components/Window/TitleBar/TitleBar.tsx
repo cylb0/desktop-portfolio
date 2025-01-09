@@ -1,14 +1,17 @@
 import { useWindowContext } from '../../../contexts/WindowContext';
-import CloseIcon from '../CloseIcon/CloseIcon';
+import useMobile from '../../../hooks/useMobile';
+import TitleBarIcon from '../TitleBarIcon/TitleBarIcon';
 import styles from './TitleBar.module.css';
+import { IconChevronCompactDown, IconSquares, IconX } from '@tabler/icons-react';
 
 interface TitleBarProps {
     id: string;
 }
 
 const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
-    const { windows, closeWindow } = useWindowContext();
+    const { windows, closeWindow, minimizeWindow } = useWindowContext();
     const windowData = windows.find((window) => window.id === id);
+    const isMobile = useMobile();
 
     if (!windowData) {
         console.error(`Window data with id "${id}" not found.`)
@@ -20,7 +23,22 @@ const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
             <div className={styles.titleContainer}>
                 <h1 className={styles.title}>{windowData.label}</h1>
             </div>
-            <CloseIcon onClick={() => closeWindow(id)} />
+            {!isMobile &&
+                <div className={styles.buttons}>
+                    <TitleBarIcon 
+                        icon={<IconChevronCompactDown color="#f8f8f6" stroke={4} />}
+                        onClick={() => minimizeWindow(id)}
+                    />
+                    <TitleBarIcon 
+                        icon={<IconSquares color="#f8f8f6" stroke={4} />}
+                        onClick={() => closeWindow(id)}
+                    />
+                    <TitleBarIcon 
+                        icon={<IconX color="#f8f8f6" stroke={4} />}
+                        onClick={() => closeWindow(id)}
+                    />
+                </div>
+            }
         </div>
     )
 }
