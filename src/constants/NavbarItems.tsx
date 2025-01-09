@@ -3,6 +3,7 @@ import ResumeIcon from '../assets/resume.png';
 import ProjectsIcon from '../assets/projects.png';
 import ContactIcon from '../assets/contact.png';
 import { WindowState } from '../contexts/WindowContext';
+import CodeEditor from '../components/CodeEditor/CodeEditor';
 
 const NavbarItems: Array<WindowState> = [
     {
@@ -11,7 +12,7 @@ const NavbarItems: Array<WindowState> = [
         alt: 'Profile icon',
         label: 'Présentation',
         isOpen: false,
-        content: undefined,
+        content: <CodeEditor />,
         zIndex: 1,
     },
     {
