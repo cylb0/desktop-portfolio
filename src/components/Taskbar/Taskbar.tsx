@@ -6,7 +6,7 @@ import { useWindowContext } from '../../contexts/WindowContext';
 
 const Taskbar: React.FC = () => {
     const isMobile = useMobile();
-    const { windows, minimizeAllWindows, restoreWindow } = useWindowContext();
+    const { closeCarousel, minimizeAllWindows, restoreWindow, toggleIsCarouselDisplayed, windows } = useWindowContext();
 
     return (
         <div className={styles.taskbar}>
@@ -15,7 +15,10 @@ const Taskbar: React.FC = () => {
                     {windows
                         .filter((window) => window.isMinimized)
                         .map((window) => (
-                            <div onClick={() => restoreWindow(window.id)}>
+                            <div
+                                key={window.id}
+                                onClick={() => restoreWindow(window.id)}
+                            >
                                 <h1>{window.label}</h1>
                             </div>
                         ))
@@ -24,8 +27,14 @@ const Taskbar: React.FC = () => {
             }
             {isMobile &&
                 <>
-                    <TaskbarButton icon={<IconTallymark3 color="#f8f8f6" />} onClick={() => {}} />
-                    <TaskbarButton icon={<IconSquare color="#f8f8f6" />} onClick={() => minimizeAllWindows()} />
+                    <TaskbarButton icon={<IconTallymark3 color="#f8f8f6" />} onClick={() => {
+                        minimizeAllWindows();
+                        toggleIsCarouselDisplayed();
+                    }} />
+                    <TaskbarButton icon={<IconSquare color="#f8f8f6" />} onClick={() => {
+                        minimizeAllWindows();
+                        closeCarousel();
+                    }} />
                     <TaskbarButton icon={<IconChevronLeft color="#f8f8f6" />} onClick={() => {}} />
                 </>
             }

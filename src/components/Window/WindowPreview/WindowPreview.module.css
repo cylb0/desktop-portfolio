@@ -1,0 +1,12 @@
+.windowPreview {
+    height: 70vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+}
+
+.content {
+    flex: 1;
+    background: #4c4a48;
+}

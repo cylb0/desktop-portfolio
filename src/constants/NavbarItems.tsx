@@ -9,8 +9,8 @@ const NavbarItems: Array<WindowState> = [
     {
         id: '1',
         src: ProfileIcon,
-        alt: 'Profile icon',
-        label: 'Présentation',
+        alt: 'About icon',
+        label: 'About me',
         isOpen: false,
         isMinimized: false,
         content: <CodeEditor />,

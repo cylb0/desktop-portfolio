@@ -10,15 +10,17 @@ import { useWindowContext, WindowProvider } from '../../contexts/WindowContext';
 import Window from '../Window/Window';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import useMobile from '../../hooks/useMobile';
+import WindowCarousel from '../WindowCarousel/WindowCarousel';
 
 const DesktopContent: React.FC = () => {
-    const { windows } = useWindowContext();
+    const { windows, isCarouselDisplayed } = useWindowContext();
+    const isMobile = useMobile();
 
     return (
         <div className={styles.desktop}>
             <div className={styles.content}>
                 {windows
-                    // .filter((window) => window.isOpen)
                     .map((window) => (
                     <Window
                         key={window.id}
@@ -27,6 +29,7 @@ const DesktopContent: React.FC = () => {
                         {window.content}
                     </Window>
                 ))}
+                {isMobile && isCarouselDisplayed && <WindowCarousel />}
                 <Navbar navbarItems={windows} />
             </div>
             <Taskbar />
