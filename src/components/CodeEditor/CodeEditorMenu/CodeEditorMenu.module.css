@@ -1,4 +1,6 @@
 .codeEditorMenu {
     background: rgba(51, 48, 49, .9);
-    flex-basis: 15%;
+    flex-basis: auto;
+    padding: 10px;
+    height: 100%;
 } 
