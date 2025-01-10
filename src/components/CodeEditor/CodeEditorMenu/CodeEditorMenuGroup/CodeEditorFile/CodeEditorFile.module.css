@@ -1,0 +1,26 @@
+.file {
+    display: flex;
+    gap: 8px;
+    padding-left: 24px;
+}
+
+.file:hover {
+    background: rgba(76, 74, 72, .2);
+}
+
+.fileSelected {
+    background: rgba(76, 74, 72, .4);
+}
+
+.language {
+    font-family: 'Ubuntu', 'sans-serif';
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.label {
+    text-transform: capitalize;
+    font-family: 'Ubuntu Mono', 'sans-serif';
+    font-size: 16px;
+    color: white;
+}

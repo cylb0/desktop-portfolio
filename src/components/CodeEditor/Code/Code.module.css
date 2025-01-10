@@ -1,6 +1,20 @@
 .code {
     flex: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
+    overflow-x: hidden !important;
+}
+
+@media (max-width: 768px) {
+    .code {
+        padding-left: 16px;
+    }
 }
 
 .code::-webkit-scrollbar {
