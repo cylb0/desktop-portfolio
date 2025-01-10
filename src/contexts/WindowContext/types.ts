@@ -13,16 +13,18 @@ export interface WindowState {
 }
 
 export interface WindowContextProps {
-    maxZIndex: number;
-    windows: Array<WindowState>;
-    openWindow: (id: string) => void;
-    closeWindow: (id: string) => void;
-    minimizeWindow: (id: string) => void;
     closeAllWindows: () => void;
+    closeWindow: (id: string) => void;
+    isCarouselDisplayed: boolean;
+    maxZIndex: number;
     minimizeAllWindows: () => void;
+    minimizeWindow: (id: string) => void;
+    openWindow: (id: string) => void;
     restoreWindow: (id: string) => void;
     selectActiveWindow: (id: string) => void;
+    toggleIsCarouselDisplayed: () => void;
     updateWindowPosition: (id: string, position: WindowPosition) => void;
+    windows: Array<WindowState>;
 }
 
 export interface WindowProviderProps {
