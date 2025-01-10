@@ -12,7 +12,13 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     const [maxZIndex, setMaxZIndex] = useState<number>(1);
     const [isCarouselDisplayed, setIsCarouselDisplayed] = useState<boolean>(false);
 
-    const toggleIsCarouselDisplayed = () => setIsCarouselDisplayed((prev) => !prev);
+    const toggleIsCarouselDisplayed = () => {
+        setIsCarouselDisplayed((prev) => !prev);
+    };
+    
+    const closeCarousel = () => {
+        setIsCarouselDisplayed(false);
+    }
 
     const openWindow = (id: string) => {
         setWindows((prev) => {
@@ -163,6 +169,7 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     return (
         <WindowContext.Provider value={{
             closeAllWindows,
+            closeCarousel,
             closeWindow,
             isCarouselDisplayed,
             minimizeAllWindows,

@@ -14,6 +14,7 @@ export interface WindowState {
 
 export interface WindowContextProps {
     closeAllWindows: () => void;
+    closeCarousel: () => void;
     closeWindow: (id: string) => void;
     isCarouselDisplayed: boolean;
     maxZIndex: number;
