@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding: 8px;
+}
+
+.container:hover {
+    border-radius: 8px;
+    /* background: rgba(220, 220, 170, .3); */
+    background: rgba(248, 248, 246, .3);
+}
+
+.icon {
+    height: 60px;
+    width: 60px;
+}

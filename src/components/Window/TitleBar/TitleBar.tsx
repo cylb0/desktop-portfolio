@@ -2,14 +2,14 @@ import { useWindowContext } from '../../../contexts/WindowContext';
 import useMobile from '../../../hooks/useMobile';
 import TitleBarIcon from '../TitleBarIcon/TitleBarIcon';
 import styles from './TitleBar.module.css';
-import { IconChevronCompactDown, IconSquares, IconX } from '@tabler/icons-react';
+import { IconChevronCompactDown, IconSquare, IconSquares, IconX } from '@tabler/icons-react';
 
 interface TitleBarProps {
     id: string;
 }
 
 const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
-    const { windows, closeWindow, minimizeWindow } = useWindowContext();
+    const { windows, closeWindow, minimizeWindow, toggleIsFullscreen } = useWindowContext();
     const windowData = windows.find((window) => window.id === id);
     const isMobile = useMobile();
 
@@ -30,8 +30,11 @@ const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
                         onClick={() => minimizeWindow(id)}
                     />
                     <TitleBarIcon 
-                        icon={<IconSquares color="#f8f8f6" stroke={4} />}
-                        onClick={() => closeWindow(id)}
+                        icon={windowData.isFullscreen
+                            ? <IconSquares color="#f8f8f6" stroke={4} />
+                            : <IconSquare color="#f8f8f6" stroke={4} />
+                        }
+                        onClick={() => toggleIsFullscreen(id)}
                     />
                     <TitleBarIcon 
                         icon={<IconX color="#f8f8f6" stroke={4} />}

@@ -47,11 +47,13 @@ const Window: React.FC<WindowProps> = ({ id, children }) => {
                         ${!isDragging && isHovered && !isActive ? styles.selectable : ''}`}
             style={{
                 visibility: (!isMobile && windowData.isOpen && !windowData.isMinimized) || (isMobile && windowData.isOpen && !windowData.isMinimized && isActive) ? 'visible' : 'hidden',
-                top: `${isMobile ? 0 : (windowData.position?.y || 0)}px`,
-                left: `${isMobile ? 0 : (windowData.position?.x || 0)}px`,
+                top: windowData.isFullscreen ? 0 : `${isMobile ? 0 : (windowData.position?.y || 0)}px`,
+                left: windowData.isFullscreen ? 0 : `${isMobile ? 0 : (windowData.position?.x || 0)}px`,
                 zIndex: windowData.zIndex,
                 border: `${isMobile ? 'none' : '1px solid rgba(76, 74, 72, .8)'}`,
                 borderRadius: `${isMobile ? '0' : '8px'}`,
+                height: windowData.isFullscreen ? 'calc(100vh - 75px)' : undefined,
+                width: windowData.isFullscreen ? '100vw' : undefined,
             }}
             onClick={() => selectActiveWindow(id)}
             onMouseEnter={() => setIsHovered(true)}

@@ -1,7 +1,6 @@
 .icon {
     height: 24px;
     width: 24px;
-    border-radius: 50%;
     border: none;
     display: flex;
     justify-content: center;
@@ -12,4 +11,5 @@
 .icon:hover {
     scale: 1.05;
     cursor: pointer;
+    background: #4c4a48;
 }

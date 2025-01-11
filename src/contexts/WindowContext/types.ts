@@ -5,8 +5,9 @@ export interface WindowState {
     src: string;
     alt: string;
     label: string;
-    isOpen: boolean;
+    isFullscreen: boolean;
     isMinimized: boolean;
+    isOpen: boolean;
     content: ReactNode;
     zIndex: number;
     position?: WindowPosition;
@@ -24,6 +25,7 @@ export interface WindowContextProps {
     restoreWindow: (id: string) => void;
     selectActiveWindow: (id: string) => void;
     toggleIsCarouselDisplayed: () => void;
+    toggleIsFullscreen: (id: string) => void;
     updateWindowPosition: (id: string, position: WindowPosition) => void;
     windows: Array<WindowState>;
 }

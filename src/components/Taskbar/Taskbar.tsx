@@ -3,10 +3,20 @@ import styles from './Taskbar.module.css';
 import { IconSquare, IconTallymark3, IconChevronLeft } from '@tabler/icons-react';
 import TaskbarButton from './TaskbarButton/TaskbarButton';
 import { useWindowContext } from '../../contexts/WindowContext';
+import MinimizedWindow from './MinimizedWindow/MinimizedWindow';
 
 const Taskbar: React.FC = () => {
     const isMobile = useMobile();
-    const { closeCarousel, minimizeAllWindows, restoreWindow, toggleIsCarouselDisplayed, windows } = useWindowContext();
+    const {
+        closeCarousel,
+        closeWindow,
+        maxZIndex,
+        minimizeAllWindows,
+        restoreWindow,
+        toggleIsCarouselDisplayed,
+        windows
+    } = useWindowContext();
+    const activeWindow = windows.find((window) => window.zIndex === maxZIndex);
 
     return (
         <div className={styles.taskbar}>
@@ -14,15 +24,14 @@ const Taskbar: React.FC = () => {
                 <>
                     {windows
                         .filter((window) => window.isMinimized)
-                        .map((window) => (
-                            <div
+                        .map((window) => 
+                            <MinimizedWindow
                                 key={window.id}
+                                src={window.src}
+                                alt={window.alt}
                                 onClick={() => restoreWindow(window.id)}
-                            >
-                                <h1>{window.label}</h1>
-                            </div>
-                        ))
-                    }
+                            />
+                        )};
                 </> 
             }
             {isMobile &&
@@ -35,7 +44,9 @@ const Taskbar: React.FC = () => {
                         minimizeAllWindows();
                         closeCarousel();
                     }} />
-                    <TaskbarButton icon={<IconChevronLeft color="#f8f8f6" />} onClick={() => {}} />
+                    <TaskbarButton icon={<IconChevronLeft color="#f8f8f6" />} onClick={() => {
+                        activeWindow && closeWindow(activeWindow.id);
+                    }} />
                 </>
             }
         </div>

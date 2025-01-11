@@ -1,7 +1,20 @@
 .taskbar {
-    background: #4C4A48;
-    opacity: .5;
+    background: rgba(76, 74, 72, .5);
     height: 75px;
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
+    padding-left: 25%;
+    gap: 24px;
+}
+
+.taskbar:hover {
+    z-index: 999;
+}
+
+@media (max-width: 768px) {
+    .taskbar {
+        justify-content: space-around;
+        padding-left: 0;
+        gap: 0;
+    }
 }

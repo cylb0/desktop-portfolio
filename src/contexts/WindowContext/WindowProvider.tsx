@@ -15,6 +15,14 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     const toggleIsCarouselDisplayed = () => {
         setIsCarouselDisplayed((prev) => !prev);
     };
+
+    const toggleIsFullscreen = (id: string) => {
+        setWindows((prev) =>
+            prev.map((window) =>
+                window.id === id ? toggleFullScreen(window) : window
+            )
+        )
+    }
     
     const closeCarousel = () => {
         setIsCarouselDisplayed(false);
@@ -147,6 +155,13 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
         }
     }
 
+    const toggleFullScreen = (window: WindowState): WindowState => {
+        return {
+            ...window,
+            isFullscreen: !window.isFullscreen,
+        }
+    }
+
     const computeBasePosition = (windowWidth: number, windowHeight: number) => {
         const baseX = (window.innerWidth - windowWidth) / 2;
         const baseY = (window.innerHeight - windowHeight) / 2;
@@ -179,6 +194,7 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
             restoreWindow,
             selectActiveWindow,
             toggleIsCarouselDisplayed,
+            toggleIsFullscreen,
             updateWindowPosition,
             windows,
         }}>
