@@ -15,8 +15,8 @@ const WindowCarousel: React.FC = () => {
         <div className={styles.carousel}>
             <Swiper
                 initialSlide={activeWindowIndex}
-                spaceBetween={50}
-                slidesPerView={1.5}
+                spaceBetween={openWindows.length === 1 ? 0 : 30}
+                slidesPerView={openWindows.length === 1 ? 1 : 1.5}
                 centeredSlides                
             >
                 {openWindows.map((window) => (

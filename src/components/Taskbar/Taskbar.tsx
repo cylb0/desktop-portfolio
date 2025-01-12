@@ -36,17 +36,26 @@ const Taskbar: React.FC = () => {
             }
             {isMobile &&
                 <>
-                    <TaskbarButton icon={<IconTallymark3 color="#f8f8f6" />} onClick={() => {
-                        minimizeAllWindows();
-                        toggleIsCarouselDisplayed();
-                    }} />
-                    <TaskbarButton icon={<IconSquare color="#f8f8f6" />} onClick={() => {
-                        minimizeAllWindows();
-                        closeCarousel();
-                    }} />
-                    <TaskbarButton icon={<IconChevronLeft color="#f8f8f6" />} onClick={() => {
-                        activeWindow && closeWindow(activeWindow.id);
-                    }} />
+                    <TaskbarButton
+                        icon={<IconTallymark3 color="#f8f8f6" />}
+                        onClick={() => {
+                            minimizeAllWindows();
+                            toggleIsCarouselDisplayed();
+                        }}
+                    />
+                    <TaskbarButton
+                        icon={<IconSquare color="#f8f8f6" />}
+                        onClick={() => {
+                            minimizeAllWindows();
+                            closeCarousel();
+                        }}
+                    />
+                    <TaskbarButton
+                        icon={<IconChevronLeft color="#f8f8f6" />}
+                        onClick={() => {
+                            activeWindow && closeWindow(activeWindow.id);
+                        }}
+                    />
                 </>
             }
         </div>
