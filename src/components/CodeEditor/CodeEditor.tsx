@@ -1,14 +1,17 @@
-import { MORGAN_CODE } from '../../constants/Morgan';
 import Code from './Code/Code';
 import styles from './CodeEditor.module.css';
 import CodeEditorMenu from './CodeEditorMenu/CodeEditorMenu';
+import { CodeEditorProvider } from '../../contexts/CodeEditorContext';
 
 const CodeEditor: React.FC = () => {
+
     return (
-        <div className={styles.codeEditor}>
-            <CodeEditorMenu />
-            <Code code={MORGAN_CODE} language={"java"} /> 
-        </div>
+        <CodeEditorProvider>
+            <div className={styles.codeEditor}>
+                <CodeEditorMenu />
+                <Code />
+            </div>
+        </CodeEditorProvider>
     );
 };
 

@@ -1,10 +1,10 @@
 import { createContext, useState } from "react";
-import { WindowContextProps, WindowPosition, WindowProviderProps, WindowState } from "./types";
+import { WindowContextType, WindowPosition, WindowProviderProps, WindowState } from "./types";
 import NavbarItems from "../../constants/NavbarItems";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { WINDOWS_CASCADE_GAP } from "../../constants/Windows";
 
-const WindowContext = createContext<WindowContextProps | undefined>(undefined);
+const WindowContext = createContext<WindowContextType | undefined>(undefined);
 
 export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     const [windows, setWindows] = useState<Array<WindowState>>(NavbarItems);

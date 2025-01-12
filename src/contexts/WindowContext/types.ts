@@ -13,7 +13,7 @@ export interface WindowState {
     position?: WindowPosition;
 }
 
-export interface WindowContextProps {
+export interface WindowContextType {
     closeAllWindows: () => void;
     closeCarousel: () => void;
     closeWindow: (id: string) => void;

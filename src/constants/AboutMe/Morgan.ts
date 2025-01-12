@@ -1,4 +1,4 @@
-export const MORGAN_CODE = `package fr.morganfoucaut.portfolio;
+const MORGAN_CODE = `package fr.morganfoucaut.portfolio;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,3 +43,5 @@ public class Morgan extends Developer {
     }
   }
 }`;
+
+export default MORGAN_CODE;

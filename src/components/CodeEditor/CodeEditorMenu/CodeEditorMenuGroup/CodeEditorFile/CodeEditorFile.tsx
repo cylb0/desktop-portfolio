@@ -1,25 +1,30 @@
+import { useCodeEditorContext } from '../../../../../contexts/CodeEditorContext';
+import { FileContent } from '../../../../../types/AboutMe';
 import styles from './CodeEditorFile.module.css';
 
 interface CodeEditorFileProps {
-    letter: string;
-    color: string;
-    label: string;
-    selected?: boolean;
+    file: FileContent;
 }
 
-const CodeEditorFile: React.FC<CodeEditorFileProps> = ({ letter, color, label, selected = false }) => {
+const CodeEditorFile: React.FC<CodeEditorFileProps> = ({ file }) => {
+    const { handleSelectFile, selectedFile } = useCodeEditorContext();
+    const isSelected = selectedFile === file;
+
     return (
-        <div className={`${styles.file} ${selected ? styles.fileSelected : ''}`}>
+        <div
+            className={`${styles.file} ${isSelected ? styles.fileSelected : ''}`}
+            onClick={() => handleSelectFile(file)}
+        >
             <span
                 className={styles.language}
-                style={{ color }}
+                style={{ color: file.language.color }}
             >
-                {letter}
+                {file.language.acronym}
             </span>
             <span
                 className={styles.label}
             >
-                {label}
+                {file.label}
             </span>
         </div>
     );

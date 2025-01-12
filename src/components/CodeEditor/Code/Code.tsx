@@ -3,16 +3,14 @@ import styles from './Code.module.css';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-java';
+import { useCodeEditorContext } from '../../../contexts/CodeEditorContext';
 
-interface CodeProps {
-    code: string;
-    language: string;
-}
+const Code: React.FC = () => {
+    const { selectedFile } = useCodeEditorContext();
 
-const Code: React.FC<CodeProps> = ({ code, language }) => {
     useEffect(() => {
         Prism.highlightAll();
-    }, []);
+    }, [selectedFile]);
 
     return (
         <div className={styles.code}>
@@ -21,8 +19,8 @@ const Code: React.FC<CodeProps> = ({ code, language }) => {
                     background: 'transparent',
                 }}
             >
-                <code className={`language-${language}`}>
-                    {code}
+                <code className={`language-${selectedFile.language.label}`}>
+                    {selectedFile.src}
                 </code>
             </pre>
         </div>

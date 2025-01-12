@@ -4,10 +4,12 @@ import styles from './CodeEditorMenu.module.css';
 import CodeEditorFile from './CodeEditorMenuGroup/CodeEditorFile/CodeEditorFile';
 import CodeEditorMenuGroup from './CodeEditorMenuGroup/CodeEditorMenuGroup';
 import { IconChevronRight } from '@tabler/icons-react';
+import { useCodeEditorContext } from '../../../contexts/CodeEditorContext';
 
 const CodeEditorMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const isMobile = useMobile();
+    const { files } = useCodeEditorContext();
 
     return (
         <div className={styles.codeEditorMenu}>
@@ -23,16 +25,19 @@ const CodeEditorMenu: React.FC = () => {
                 className={`${styles.menu} ${isMobile && isOpen ? styles.open : ''}`}
                 onClick={() => setIsOpen(false)}
             >
-                <CodeEditorMenuGroup label={'presentation'}>
-                    <CodeEditorFile letter={'J'} color={"#FF0004"} label={'File.java'} />
-                    <CodeEditorFile letter={'J'} color={"#FF0004"} label={'File.java'} />
-                </CodeEditorMenuGroup>
-
-                <CodeEditorMenuGroup label={'skills'}>
-                    <CodeEditorFile letter={'J'} color={"#FF0004"} label={'File.java'} />
-                    <CodeEditorFile letter={'J'} color={"#FF0004"} label={'File.java'} selected />
-                    <CodeEditorFile letter={'J'} color={"#FF0004"} label={'File.java'} />
-                </CodeEditorMenuGroup>
+                {files.map((group, gIndex) => 
+                    <CodeEditorMenuGroup
+                        key={`group-${gIndex}`} 
+                        label={group.label}
+                    >
+                        {group.content.map((file, fIndex) =>
+                            <CodeEditorFile
+                                key={`file-${fIndex}`}
+                                file={file}
+                            />
+                        )}
+                    </CodeEditorMenuGroup>
+                )}
             </div>
         </div>
     );
