@@ -5,11 +5,11 @@
 }
 
 .file:hover {
-    background: rgba(76, 74, 72, .2);
+    background: #4c4a48;
 }
 
 .fileSelected {
-    background: rgba(76, 74, 72, .4);
+    background: rgba(76, 74, 72, .5);
 }
 
 .language {

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { WindowContextType, WindowPosition, WindowProviderProps, WindowState } from "./types";
 import NavbarItems from "../../constants/NavbarItems";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
@@ -11,6 +11,11 @@ export const WindowProvider: React.FC<WindowProviderProps> = ({ children }) => {
     const { width: windowWidth, height: windowHeight } = useWindowDimensions();
     const [maxZIndex, setMaxZIndex] = useState<number>(1);
     const [isCarouselDisplayed, setIsCarouselDisplayed] = useState<boolean>(false);
+
+    useEffect(() => {
+        const anyWindowOpen = windows.some((window) => window.isOpen);
+        if (!anyWindowOpen && isCarouselDisplayed) setIsCarouselDisplayed(false);
+    }, [windows, isCarouselDisplayed])
 
     const toggleIsCarouselDisplayed = () => {
         setIsCarouselDisplayed((prev) => !prev);
