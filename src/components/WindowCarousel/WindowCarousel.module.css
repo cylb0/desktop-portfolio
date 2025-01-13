@@ -5,6 +5,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: translateY(-100%);
+    transition: all .3s ease-in-out;
+}
+
+.display {
+    transform: translateY(0);
 }
 
 .slideContent {

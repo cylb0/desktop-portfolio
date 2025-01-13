@@ -8,7 +8,6 @@
 
 .container:hover {
     border-radius: 8px;
-    /* background: rgba(220, 220, 170, .3); */
     background: rgba(248, 248, 246, .3);
 }
 

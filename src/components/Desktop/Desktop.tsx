@@ -29,7 +29,7 @@ const DesktopContent: React.FC = () => {
                         {window.content}
                     </Window>
                 ))}
-                {isMobile && isCarouselDisplayed && <WindowCarousel />}
+                {isMobile && <WindowCarousel isDisplayed={isCarouselDisplayed} />}
                 <Navbar navbarItems={windows} />
             </div>
             <Taskbar />
