@@ -2,3 +2,7 @@
     background: transparent;
     border: none;
 }
+
+.active {
+    background: rgba(248, 248, 246, .3);
+}

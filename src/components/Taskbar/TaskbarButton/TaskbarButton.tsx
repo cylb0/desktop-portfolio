@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import styles from './TaskbarButton.module.css';
 
 interface TasbkarButtonProps {
@@ -7,8 +7,22 @@ interface TasbkarButtonProps {
 }
 
 const TaskbarButton: React.FC<TasbkarButtonProps> = ({ icon, onClick }) => {
+    const handleTouchStart = (e: React.TouchEvent<HTMLButtonElement>) => {
+        const element = e.currentTarget;
+        element.classList.add(styles.active);
+    }
+
+    const handleTouchEnd = (e: React.TouchEvent<HTMLButtonElement>) => {
+        const element = e.currentTarget;
+        element.classList.remove(styles.active);
+    }
     return (
-        <button className={styles.taskbarButton} onClick={onClick}>
+        <button
+            className={styles.taskbarButton}
+            onClick={onClick}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+        >
             {icon}
         </button>
     );
