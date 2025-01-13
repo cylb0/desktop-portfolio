@@ -40,7 +40,6 @@ const Window: React.FC<WindowProps> = ({ id, children }) => {
     
     return (
         <div
-            ref={isMobile ? ref : drag}
             className={`${styles.window}
                         ${isDragging ? styles.isDragging : ''}
                         ${!isDragging && isActive ? styles.active : ''}
@@ -60,7 +59,7 @@ const Window: React.FC<WindowProps> = ({ id, children }) => {
             onMouseLeave={() => setIsHovered(false)}
             onMouseDown={() => selectActiveWindow(id)}
         >
-            <TitleBar id={id} />
+            <TitleBar id={id} ref={isMobile ? ref : drag} />
             <div className={styles.content}>{children}</div>
         </div>
     )

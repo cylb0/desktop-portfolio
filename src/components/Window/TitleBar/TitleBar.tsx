@@ -3,12 +3,13 @@ import useMobile from '../../../hooks/useMobile';
 import TitleBarIcon from '../TitleBarIcon/TitleBarIcon';
 import styles from './TitleBar.module.css';
 import { IconChevronCompactDown, IconSquare, IconSquares, IconX } from '@tabler/icons-react';
+import { forwardRef } from 'react';
 
 interface TitleBarProps {
     id: string;
 }
 
-const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
+const TitleBar = forwardRef<HTMLDivElement, TitleBarProps>(({ id }, ref) => {
     const { windows, closeWindow, minimizeWindow, toggleIsFullscreen } = useWindowContext();
     const windowData = windows.find((window) => window.id === id);
     const isMobile = useMobile();
@@ -19,7 +20,7 @@ const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
     }
 
     return (
-        <div className={styles.titleBar}>
+        <div ref={ref} className={styles.titleBar}>
             <div className={styles.titleContainer}>
                 <h1 className={styles.title}>{windowData.label}</h1>
             </div>
@@ -44,6 +45,6 @@ const TitleBar: React.FC<TitleBarProps> = ({ id }) => {
             }
         </div>
     )
-}
+});
 
 export default TitleBar;
